@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repositorio Digital - Universidad</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <h1><i class="fas fa-graduation-cap"></i> Repositorio Digital</h1>
+            </div>
+            <div class="nav-menu">
+                <a href="#inicio" class="nav-link active">Inicio</a>
+                <a href="#repositorios" class="nav-link">Repositorios</a>
+                <a href="#info" class="nav-link">Información</a>
+            </div>
+            <div class="nav-auth">
+                <button class="btn-login" id="loginBtn">Iniciar Sesión</button>
+                <button class="btn-register" id="registerBtn">Registrarse</button>
+                <div class="user-menu" id="userMenu" style="display: none;">
+                    <span id="userName"></span>
+                    <button class="btn-logout" id="logoutBtn">Cerrar Sesión</button>
+                </div>
+            </div>
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Sección Inicio -->
+    <section id="inicio" class="section active">
+        <div class="hero">
+            <div class="hero-content">
+                <h2>Repositorio Digital PSM</h2>
+                <p>Plataforma digital integral para la gestión, almacenamiento y difusión de proyectos académicos de la Universidad PSM. Nuestro sistema permite a estudiantes, profesores e investigadores compartir sus trabajos de manera organizada y accesible, facilitando la colaboración académica y el intercambio de conocimiento entre las diferentes carreras y sedes de la universidad.</p>
+
+                <div class="hero-stats">
+                    <div class="stat">
+                        <h3 id="totalProjects">0</h3>
+                        <p>Proyectos Disponibles</p>
+                    </div>
+                </div>
+
+                <div class="carreras-summary">
+                    <h3>Carreras Disponibles</h3>
+                    <div class="carreras-grid">
+                        <div class="carrera-item">Arquitectura</div>
+                        <div class="carrera-item">Ingeniería Civil</div>
+                        <div class="carrera-item">Ingeniería Eléctrica</div>
+                        <div class="carrera-item">Ingeniería Electrónica</div>
+                        <div class="carrera-item">Ingeniería Industrial</div>
+                        <div class="carrera-item">Ingeniería y Mantenimiento Mecánico</div>
+                        <div class="carrera-item">Ingeniería de Sistemas</div>
+                        <div class="carrera-item">Ingeniería de Diseño Industrial</div>
+                        <div class="carrera-item">Ingeniería en Telecomunicaciones</div>
+                        <div class="carrera-item">Ingeniería Química</div>
+                        <div class="carrera-item">Ingeniería de Petróleo</div>
+                        <div class="carrera-item">Ingeniería Agronómica</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Repositorios -->
+    <section id="repositorios" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Repositorio de Proyectos</h2>
+                <button class="btn-primary" id="addProjectBtn" style="display: none;">
+                    <i class="fas fa-plus"></i> Subir Proyecto
+                </button>
+            </div>
+            
+            <!-- Barra de búsqueda y filtros -->
+            <div class="search-filters">
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Buscar proyectos...">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="filters">
+                    <select id="carreraFilter">
+                        <option value="">Todas las carreras</option>
+                        <option value="Arquitectura">Arquitectura</option>
+                        <option value="Ingeniería Civil">Ingeniería Civil</option>
+                        <option value="Ingeniería Eléctrica">Ingeniería Eléctrica</option>
+                        <option value="Ingeniería Electrónica">Ingeniería Electrónica</option>
+                        <option value="Ingeniería Industrial">Ingeniería Industrial</option>
+                        <option value="Ingeniería y Mantenimiento Mecánico">Ingeniería y Mantenimiento Mecánico</option>
+                        <option value="Ingeniería de Sistemas">Ingeniería de Sistemas</option>
+                        <option value="Ingeniería de Diseño Industrial">Ingeniería de Diseño Industrial</option>
+                        <option value="Ingeniería en Telecomunicaciones">Ingeniería en Telecomunicaciones</option>
+                        <option value="Ingeniería Química">Ingeniería Química</option>
+                        <option value="Ingeniería de Petróleo">Ingeniería de Petróleo</option>
+                        <option value="Ingeniería Agronómica">Ingeniería Agronómica</option>
+                    </select>
+                    <select id="semestreFilter">
+                        <option value="">Todos los semestres</option>
+                        <option value="1">1° Semestre</option>
+                        <option value="2">2° Semestre</option>
+                        <option value="3">3° Semestre</option>
+                        <option value="4">4° Semestre</option>
+                        <option value="5">5° Semestre</option>
+                        <option value="6">6° Semestre</option>
+                        <option value="7">7° Semestre</option>
+                        <option value="8">8° Semestre</option>
+                        <option value="9">9° Semestre</option>
+                        <option value="10">10° Semestre</option>
+                    </select>
+                    <select id="tipoFilter">
+                        <option value="">Todos los tipos</option>
+                        <option value="Materia">Por Materia</option>
+                        <option value="Servicio Comunitario">Por Servicio Comunitario</option>
+                        <option value="Trabajo de Grado">Por Trabajo de Grado</option>
+                        <option value="Pasantía">Por Pasantía</option>
+                    </select>
+                    <select id="sedeFilter">
+                        <option value="">Todas las sedes</option>
+                        <option value="Sede Principal Barcelona">Sede Principal Barcelona</option>
+                        <option value="Extensión Valencia">Extensión Valencia</option>
+                        <option value="Extensión Cabimas">Extensión Cabimas</option>
+                        <option value="Extensión Maracaibo">Extensión Maracaibo</option>
+                        <option value="Extensión Caracas">Extensión Caracas</option>
+                        <option value="Extensión Mérida">Extensión Mérida</option>
+                        <option value="Extensión San Cristóbal">Extensión San Cristóbal</option>
+                        <option value="Extensión Barinas">Extensión Barinas</option>
+                        <option value="Extensión Maracay">Extensión Maracay</option>
+                        <option value="Extensión Porlamar">Extensión Porlamar</option>
+                        <option value="Extensión Puerto Ordaz">Extensión Puerto Ordaz</option>
+                        <option value="Extensión Maturín">Extensión Maturín</option>
+                        <option value="Extensión Ciudad Ojeda">Extensión Ciudad Ojeda</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Grid de proyectos -->
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Los proyectos se cargarán dinámicamente aquí -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Información -->
+    <section id="info" class="section">
+        <div class="container">
+            <div class="info-content">
+                <h2>Información Institucional</h2>
+                
+                <div class="info-cards">
+                    <div class="info-card">
+                        <div class="card-icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <h3>Misión</h3>
+                        <p>Formar profesionales integrales, competentes y comprometidos con el desarrollo social, a través de programas académicos de excelencia que promuevan la investigación, la innovación y el emprendimiento.</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <div class="card-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h3>Visión</h3>
+                        <p>Ser reconocida como una institución de educación superior líder en la formación de profesionales de calidad, con proyección nacional e internacional, que contribuya al desarrollo sostenible de la región.</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <div class="card-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3>Valores</h3>
+                        <ul>
+                            <li>Excelencia Académica</li>
+                            <li>Integridad y Ética</li>
+                            <li>Innovación y Creatividad</li>
+                            <li>Compromiso Social</li>
+                            <li>Respeto y Tolerancia</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal de Login -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Iniciar Sesión</h3>
+                <button class="modal-close" id="closeLoginModal">&times;</button>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Correo Electrónico</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Contraseña</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn-primary">Iniciar Sesión</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Registro -->
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Registrarse</h3>
+                <button class="modal-close" id="closeRegisterModal">&times;</button>
+            </div>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="registerName">Nombre Completo</label>
+                    <input type="text" id="registerName" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Correo Electrónico</label>
+                    <input type="email" id="registerEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Contraseña</label>
+                    <input type="password" id="registerPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerCarrera">Carrera</label>
+                    <select id="registerCarrera" required>
+                        <option value="">Seleccionar carrera</option>
+                        <option value="Arquitectura">Arquitectura</option>
+                        <option value="Ingeniería Civil">Ingeniería Civil</option>
+                        <option value="Ingeniería Eléctrica">Ingeniería Eléctrica</option>
+                        <option value="Ingeniería Electrónica">Ingeniería Electrónica</option>
+                        <option value="Ingeniería Industrial">Ingeniería Industrial</option>
+                        <option value="Ingeniería y Mantenimiento Mecánico">Ingeniería y Mantenimiento Mecánico</option>
+                        <option value="Ingeniería de Sistemas">Ingeniería de Sistemas</option>
+                        <option value="Ingeniería de Diseño Industrial">Ingeniería de Diseño Industrial</option>
+                        <option value="Ingeniería en Telecomunicaciones">Ingeniería en Telecomunicaciones</option>
+                        <option value="Ingeniería Química">Ingeniería Química</option>
+                        <option value="Ingeniería de Petróleo">Ingeniería de Petróleo</option>
+                        <option value="Ingeniería Agronómica">Ingeniería Agronómica</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary">Registrarse</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Subir Proyecto -->
+    <div class="modal" id="projectModal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3>Subir Nuevo Proyecto</h3>
+                <button class="modal-close" id="closeProjectModal">&times;</button>
+            </div>
+            <form id="projectForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="projectTitle">Título del Proyecto *</label>
+                        <input type="text" id="projectTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="projectCarrera">Carrera *</label>
+                        <select id="projectCarrera" required>
+                            <option value="">Seleccionar carrera</option>
+                            <option value="Arquitectura">Arquitectura</option>
+                            <option value="Ingeniería Civil">Ingeniería Civil</option>
+                            <option value="Ingeniería Eléctrica">Ingeniería Eléctrica</option>
+                            <option value="Ingeniería Electrónica">Ingeniería Electrónica</option>
+                            <option value="Ingeniería Industrial">Ingeniería Industrial</option>
+                            <option value="Ingeniería y Mantenimiento Mecánico">Ingeniería y Mantenimiento Mecánico</option>
+                            <option value="Ingeniería de Sistemas">Ingeniería de Sistemas</option>
+                            <option value="Ingeniería de Diseño Industrial">Ingeniería de Diseño Industrial</option>
+                            <option value="Ingeniería en Telecomunicaciones">Ingeniería en Telecomunicaciones</option>
+                            <option value="Ingeniería Química">Ingeniería Química</option>
+                            <option value="Ingeniería de Petróleo">Ingeniería de Petróleo</option>
+                            <option value="Ingeniería Agronómica">Ingeniería Agronómica</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="projectSemestre">Semestre *</label>
+                        <select id="projectSemestre" required>
+                            <option value="">Seleccionar semestre</option>
+                            <option value="1">1° Semestre</option>
+                            <option value="2">2° Semestre</option>
+                            <option value="3">3° Semestre</option>
+                            <option value="4">4° Semestre</option>
+                            <option value="5">5° Semestre</option>
+                            <option value="6">6° Semestre</option>
+                            <option value="7">7° Semestre</option>
+                            <option value="8">8° Semestre</option>
+                            <option value="9">9° Semestre</option>
+                            <option value="10">10° Semestre</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="projectMateria">Materia/Servicio/Trabajo de Grado *</label>
+                        <input type="text" id="projectMateria" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="projectLinea">Línea de Investigación (Opcional)</label>
+                        <input type="text" id="projectLinea">
+                    </div>
+                    <div class="form-group">
+                        <label for="projectYear">Año de Publicación *</label>
+                        <input type="number" id="projectYear" min="2020" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="projectSede">Sede/Extensión *</label>
+                        <select id="projectSede" required>
+                            <option value="">Seleccionar sede</option>
+                            <option value="Sede Principal Barcelona">Sede Principal Barcelona</option>
+                            <option value="Extensión Valencia">Extensión Valencia</option>
+                            <option value="Extensión Cabimas">Extensión Cabimas</option>
+                            <option value="Extensión Maracaibo">Extensión Maracaibo</option>
+                            <option value="Extensión Caracas">Extensión Caracas</option>
+                            <option value="Extensión Mérida">Extensión Mérida</option>
+                            <option value="Extensión San Cristóbal">Extensión San Cristóbal</option>
+                            <option value="Extensión Barinas">Extensión Barinas</option>
+                            <option value="Extensión Maracay">Extensión Maracay</option>
+                            <option value="Extensión Porlamar">Extensión Porlamar</option>
+                            <option value="Extensión Puerto Ordaz">Extensión Puerto Ordaz</option>
+                            <option value="Extensión Maturín">Extensión Maturín</option>
+                            <option value="Extensión Ciudad Ojeda">Extensión Ciudad Ojeda</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="projectKeywords">Palabras Clave *</label>
+                        <input type="text" id="projectKeywords" placeholder="simulación, análisis, diseño, etc." required>
+                        <small>Separa las palabras clave con comas</small>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="projectDescription">Descripción del Proyecto *</label>
+                    <textarea id="projectDescription" rows="4" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="projectLink">Link del Proyecto (Opcional)</label>
+                    <input type="url" id="projectLink" placeholder="https://...">
+                </div>
+                
+                <div class="form-group">
+                    <label for="projectFiles">Archivos del Proyecto *</label>
+                    <input type="file" id="projectFiles" multiple accept=".dwg,.rvt,.skp,.max,.3ds,.blend,.cpp,.java,.py,.js,.html,.css,.php,.sql,.zip,.rar,.pdf,.doc,.docx,.ppt,.pptx">
+                    <small>Formatos soportados: AutoCAD (.dwg), Revit (.rvt), SketchUp (.skp), 3ds Max (.max), Blender (.blend), C++ (.cpp), Java (.java), Python (.py), JavaScript (.js), HTML (.html), CSS (.css), PHP (.php), SQL (.sql), Archivos comprimidos (.zip, .rar), Documentos (.pdf, .doc, .docx, .ppt, .pptx)</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="projectImage">Imagen de Portada (Opcional)</label>
+                    <input type="file" id="projectImage" accept="image/*">
+                </div>
+                
+                <button type="submit" class="btn-primary">Subir Proyecto</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
