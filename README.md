@@ -141,13 +141,6 @@ repositoriodigital_SE/
 - **CSS modular** con variables
 - **JavaScript ES6+** con funciones modernas
 - **Código limpio** y comentado
-
-### Mejores Prácticas
-- ✅ **Accesibilidad** (ARIA labels)
-- ✅ **SEO** optimizado
-- ✅ **Performance** optimizada
-- ✅ **Código mantenible**
-
 ## 🚀 Próximas Mejoras
 
 ### Funcionalidades Planificadas
@@ -160,31 +153,3 @@ repositoriodigital_SE/
 - [ ] **Panel de administración**
 - [ ] **Reportes** y estadísticas avanzadas
 
-## 📞 Soporte
-
-### Contacto
-- **Desarrollador**: [Tu nombre]
-- **Universidad**: Universidad PSM
-- **Proyecto**: Repositorio Digital PSM
-
-### Reportar Problemas
-Si encuentras algún problema o tienes sugerencias, por favor:
-1. **Revisa** la documentación
-2. **Verifica** la compatibilidad del navegador
-3. **Contacta** al equipo de desarrollo
-
-## 📄 Licencia
-
-Este proyecto está desarrollado para la **Universidad PSM** como parte del trabajo de grado. Todos los derechos reservados.
-
----
-
-## 🎉 Agradecimientos
-
-- **Universidad PSM** por el apoyo institucional
-- **Comunidad académica** por la retroalimentación
-- **Estudiantes** por las pruebas de usabilidad
-
----
-
-*Repositorio Digital PSM - Versión Beta*
