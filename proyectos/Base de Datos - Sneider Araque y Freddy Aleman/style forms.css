@@ -1,0 +1,46 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    font-family: cursive;
+    background: #56ccf2; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #56ccf2, #2f80ed); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #56ccf2, #2f80ed); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  }
+
+ input,
+    textarea {
+    width: 600px;
+    padding: 5px;
+    outline: none;
+
+  }
+
+  label {
+    line-height: 2rem;
+  }
+
+  input[type="submit"] {
+   transform: translate(2.2%);
+   padding: 3px;
+   margin-top: 1rem;
+   font-family: cursive;
+   font-weight: bold;
+   color: black;
+   width: 50%;
+
+  }
+
+ fieldset {
+   padding: 20px 40px;
+   width: 100px;
+   color: black;
+   background: #fff6;
+   backdrop-filter: blur(200px);
+   display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+ }
+

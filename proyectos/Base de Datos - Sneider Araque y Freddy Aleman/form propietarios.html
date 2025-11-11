@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="style forms.css">
+	<title>Formulario Propietarios</title>
+</head>
+
+<body>
+	<form method="post" action="form_propietarios.php">
+      <fieldset>
+        <legend>Propietario</legend>
+
+        <div class="form-control">
+          <label for="cedula">Cedula</label>
+          <input type="cedula" name="cedula_propietario" id="cedula_propietario" placeholder="Introduce la cedula" required />
+        </div>
+
+        <div class="form-control">
+          <label for="name">Nombre</label>
+          <input type="name" name="nombre_propietario" id="nombre_propietario" placeholder="Introduce el nombre" required />
+        </div>
+
+        <div class="form-control">
+          <label for="email">Email</label>
+          <input type="email" name="correo_propietario" id="correo_propietario" placeholder="Introduce el Email" required />
+        </div>
+
+        <div class="form-control">
+          <label for="direccion">Direccion</label>
+          <input type="direccion" name="direccion_propietario" id="direccion_propietario" placeholder="Introduce la direccion" required />
+        </div>
+
+        <div class="form-control">
+          <label for="phone">Telefono</label>
+          <input type="phone" name="telf_propietario" id="telf_propietario" placeholder="Introduce el numero de telefono" required />
+        </div>
+
+         <div class="form-control">
+          <label for="codigo">Codigo de Inmuebles (I-00#)</label>
+          <input type="codigo" name="cod_inmuebles" id="cod_inmuebles" placeholder="Introduce el codigo de inmuebles" required />
+        </div>
+
+        <input type="submit" value="Enviar" class="submit-btn" />
+      </fieldset>
+</form>
+</form>
+</body>
+</html>
+

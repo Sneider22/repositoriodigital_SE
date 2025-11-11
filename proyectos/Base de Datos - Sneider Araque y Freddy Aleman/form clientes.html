@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="style forms.css">
+	<title>Formulario Clientes</title>
+</head>
+
+<body>
+	<form method="post" action="form_clientes.php">
+      <fieldset>
+        <legend>Cliente</legend>
+
+        <div class="form-control">
+          <label for="cedula">Cedula</label>
+          <input type="cedula" name="cedula_cliente" id="cedula_cliente" placeholder="Introduce la cedula" required />
+        </div>
+
+        <div class="form-control">
+          <label for="name">Nombre</label>
+          <input type="name" name="nombre_cliente" id="nombre_cliente" placeholder="Introduce el nombre" required />
+        </div>
+
+        <div class="form-control">
+          <label for="email">Email</label>
+          <input type="email" name="correo_cliente" id="correo_cliente" placeholder="Introduce el Email" required />
+        </div>
+
+        <div class="form-control">
+          <label for="direccion">Direccion</label>
+          <input type="direccion" name="direccion_cliente" id="direccion_cliente" placeholder="Introduce la direccion" required />
+        </div>
+
+        <div class="form-control">
+          <label for="phone">Telefono</label>
+          <input type="phone" name="telf_cliente" id="telf_cliente" placeholder="Introduce el numero de telefono" required />
+        </div>
+        <br>
+        <div class="form-control">
+          <label for="type">Tipo de Cliente</label>
+            <select name="cod_tipo_clientes" id="cod_tipo_clientes">
+              <option value="tipo">Selecciona el tipo de Cliente</option>
+              <option value="TC-001">TC-001 (Comprador)</option>
+              <option value="TC-002">TC-002 (Inquilino)</option>
+            </select>
+        </div>
+
+        <input type="submit" value="Enviar" class="submit-btn" />
+      </fieldset>
+</form>
+</body>
+</html>
+
