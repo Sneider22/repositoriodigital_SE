@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="style forms.css">
+	<title>Formulario Inmuebles</title>
+</head>
+
+<body>
+	<form method="post" action="form_inmuebles.php">
+      <fieldset>
+        <legend>Inmueble</legend>
+
+        <div class="form-control">
+          <label for="codigo">Codigo de Inmuebles (I-00#)</label>
+          <input type="codigo" name="cod_inmuebles" id="cod_inmuebles" placeholder="Introduce el codigo de inmueble" required />
+        </div>
+
+        <div class="form-control">
+          <label for="direccion">Ubicacion</label>
+          <input type="direccion" name="ubicacion_inmuebles" id="ubicacion_inmuebles" placeholder="Introduce la ubicacion" required />
+        </div>
+
+        <div class="form-control">
+          <label for="descripcion">Descripcion</label>
+          <input type="descripcion" name="nombre_inmuebles" id="nombre_inmuebles" placeholder="Introduce la descripcion" required />
+        </div>
+
+        <br>
+        <div class="form-control">
+          <label for="type">Tipo de Inmuebles</label>
+            <select name="cod_tipo" id="cod_tipo">
+              <option value="tipo">Selecciona el tipo de Inmueble</option>
+              <option value="TI-001">TI-001 (Casa)</option>
+              <option value="TI-002">TI-002 (Apartamento)</option>
+            </select>
+        </div>
+        <br>
+
+        <div class="form-control">
+          <label for="imagen">Imagen</label>
+          <input type="text" name="foto_inmuebles" id="foto_inmuebles" placeholder="Introduce la imagen" required>
+        </div>
+
+        <div class="form-control">
+          <label for="precio">Precio</label>
+          <input type="text" name="precio_inmuebles" id="precio_inmuebles" placeholder="Introduce el precio" required />
+        </div>
+
+        <input type="submit" value="Enviar" class="submit-btn"/>
+      </fieldset>
+</form>
+</body>
+</html>
