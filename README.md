@@ -1,78 +1,66 @@
-# 📚 Repositorio Digital 
+# 📚 Repositorio Digital
 
-## 🎯 Descripción del Proyecto
+## 🎯 Descripción
 
-El **Repositorio Digital** es una plataforma web integral diseñada para la gestión, almacenamiento y difusión de proyectos académicos. Este sistema permite a estudiantes, profesores e investigadores compartir sus trabajos de manera organizada y accesible, facilitando la colaboración académica y el intercambio de conocimiento entre las diferentes carreras y sedes de la universidad.
+Plataforma web para la gestión, almacenamiento y difusión de proyectos académicos. Permite a estudiantes y profesores compartir trabajos de manera organizada y accesible.
 
 ## ✨ Características Principales
 
-### 🔐 Sistema de Autenticación
-- **Registro de usuarios** con información completa
-- **Inicio de sesión** seguro
-- **Gestión de perfiles** por carrera
-- **Sesiones persistentes**
+### 🔐 Autenticación
+- Registro e inicio de sesión de usuarios
+- Gestión de perfiles por carrera
+- Sesiones persistentes
 
 ### 📁 Gestión de Proyectos
-- **Subida de proyectos** con formulario completo
-- **Múltiples formatos de archivo** soportados
-- **Sistema de palabras clave** para mejor organización
-- **Categorización por carrera, semestre y tipo**
-- **Ubicación por sede/extensión**
+- Subida de proyectos con formulario completo
+- Múltiples formatos de archivo soportados
+- Sistema de palabras clave
+- Categorización por carrera, semestre, tipo y sede
+- Campo de Profesor (opcional)
+- Enlace del proyecto (opcional)
 
-### 🔍 Sistema de Búsqueda y Filtros
-- **Búsqueda en tiempo real** por título, descripción y palabras clave
-- **Filtros avanzados** por:
-  - Carrera (12 ingenierías disponibles)
-  - Semestre (1° al 10°)
-  - Tipo de proyecto (Materia, Servicio Comunitario, Trabajo de Grado, Pasantía)
-  - Sede/Extensión 
-- **Búsqueda por palabras clave**
+### 🔍 Búsqueda y Filtros
+- Búsqueda en tiempo real por título, descripción y palabras clave
+- Filtros por carrera, semestre, tipo de proyecto y sede
+- Resultados instantáneos
+
+### 📥 Descarga de Archivos
+- Descarga individual de archivos
+- Descarga completa del proyecto en formato ZIP
+- Pre-carga de proyectos con archivos asociados
+
+### 🖼️ Galería de Imágenes
+- Visualización automática de imágenes del proyecto en formato cards
+- Detección automática de archivos de imagen (PNG, JPG, JPEG, GIF, WEBP, SVG)
+- Cards con overlay interactivo y descarga individual
 
 ### 🎨 Interfaz de Usuario
-- **Diseño responsive** para móviles y computadoras
-- **Tema claro y oscuro** con colorimetría personalizada
-- **Navegación intuitiva** entre secciones
-- **Cards de proyectos** con información completa
-- **Animaciones suaves** y transiciones
+- Diseño responsive optimizado para móviles, tablets y desktop
+- Tema claro y oscuro
+- Scroll automático al inicio al abrir proyectos
+- Navegación intuitiva entre secciones
+- Animaciones suaves
 
-## 🛠️ Tecnologías Utilizadas
+## 🛠️ Tecnologías
 
-### Frontend
 - **HTML5** - Estructura semántica
-- **CSS3** - Estilos y diseño responsive
+- **CSS3** - Estilos responsive con variables CSS
 - **JavaScript (ES6+)** - Funcionalidad interactiva
+- **JSZip** - Generación de archivos ZIP
 - **Font Awesome** - Iconografía
-
-### Características Técnicas
-- **Diseño Responsive** - Mobile First
-- **CSS Grid y Flexbox** - Layout moderno
-- **Variables CSS** - Temas dinámicos
-- **Local Storage** - Persistencia de datos
-- **Modales** - Interfaz de usuario avanzada
 
 ## 📱 Compatibilidad
 
-### Navegadores Soportados
-- ✅ Chrome 90+
-- ✅ Firefox 88+
-- ✅ Safari 14+
-- ✅ Edge 90+
+- ✅ Chrome, Firefox, Safari, Edge (versiones recientes)
+- 📱 Móviles (320px+)
+- 📱 Tablets (768px+)
+- 💻 Desktop (1200px+)
 
-### Dispositivos
-- 📱 **Móviles** (320px+)
-- 📱 **Tablets** (768px+)
-- 💻 **Computadoras** (1200px+)
+## 🚀 Instalación
 
-## 🚀 Instalación y Uso
-
-### Requisitos
-- Navegador web moderno
-- Conexión a internet (para iconos)
-
-### Instalación
-1. **Clona o descarga** el repositorio
-2. **Abre** el archivo `index.html` en tu navegador
-3. **¡Listo!** El sistema está funcionando
+1. Clona o descarga el repositorio
+2. Abre `index.html` en tu navegador
+3. Para descargas de archivos, se recomienda usar un servidor local (ver `INSTRUCCIONES_SERVIDOR.md`)
 
 ### Estructura de Archivos
 ```
@@ -80,76 +68,62 @@ repositoriodigital_SE/
 ├── index.html          # Página principal
 ├── styles.css          # Estilos CSS
 ├── script.js           # Lógica JavaScript
+├── main.js             # Lógica adicional
+├── proyectos/          # Carpeta con proyectos pre-cargados
+│   ├── Base de Datos - Sneider Araque y Freddy Aleman/
+│   ├── Serv. Comunitario/
+│   ├── Simulación Digital - Sneider Araque/
+│   └── Mercado Municipal - Sofia Sanchez/
 └── README.md           # Documentación
 ```
 
-## 🎯 Funcionalidades Detalladas para el Ejemplo PSM
+## 📋 Funcionalidades Detalladas
 
-### 📝 Subida de Proyectos
-- **Título del proyecto** (obligatorio)
-- **Carrera** (selección de 12 opciones)
-- **Semestre** (1° al 10°)
-- **Materia/Servicio/Trabajo de Grado/Pasantía**
-- **Línea de investigación** (opcional)
-- **Año de publicación** (dinámico hasta año actual)
-- **Sede/Extensión** (13 ubicaciones)
-- **Palabras clave** (separadas por comas)
-- **Descripción detallada**
-- **Link del proyecto** (opcional)
-- **Archivos del proyecto** (múltiples formatos)
-- **Imagen de portada** (opcional)
+### Subida de Proyectos
+- Título, carrera, semestre, materia/tipo
+- Año, sede, palabras clave, descripción
+- Campo de Profesor (opcional)
+- Enlace del proyecto (opcional)
+- Múltiples archivos (PDF, ZIP, RAR, imágenes, etc.)
 
-### 🔍 Sistema de Búsqueda
-- **Búsqueda global** en tiempo real
-- **Filtros combinados** para resultados precisos
-- **Búsqueda por palabras clave**
-- **Resultados instantáneos**
+### Visualización de Proyectos
+- Cards con información completa
+- Página de detalle con:
+  - Información del proyecto
+  - Sección de enlace (si aplica)
+  - Descripción completa
+  - Galería de imágenes en cards
+  - Palabras clave
+  - Lista de archivos descargables
 
-### 📊 Estadísticas
-- **Contador de proyectos** en tiempo real
-- **Actualización automática** al subir nuevos proyectos
+### Descarga de Archivos
+- Descarga individual por archivo
+- Descarga completa en ZIP con todos los archivos
+- Soporte para proyectos pre-cargados
 
 ## 🎨 Personalización
 
-### Temas Disponibles
-- **Tema Claro**: Azul oscuro (#1e3a8a) con blanco
-- **Tema Oscuro**: Fondo negro con azul claro (#60a5fa) y letras blancas
+- **Tema Claro**: Azul oscuro con fondo blanco
+- **Tema Oscuro**: Fondo oscuro con acentos azules
+- Cambio de tema persistente en Local Storage
 
-## 📈 Características Avanzadas
+## 📈 Características Técnicas
 
-### 🔄 Persistencia de Datos
-- **Local Storage** para tema seleccionado
-- **Datos de sesión** mantenidos
-- **Configuraciones** guardadas
+- Diseño Mobile First
+- CSS Grid y Flexbox para layouts
+- Variables CSS para temas dinámicos
+- Local Storage para persistencia
+- Carga asíncrona de archivos
+- Generación de ZIP en el cliente
 
-### 🎭 Animaciones
-- **Transiciones suaves** entre secciones
-- **Efectos hover** en elementos interactivos
-- **Animaciones de entrada** para cards
-- **Loading states** para mejor UX
+## 🔧 Requisitos para Descargas
 
-### 📱 Responsive Design
-- **Mobile First** approach
-- **Breakpoints** optimizados
-- **Navegación adaptativa**
-- **Botones optimizados** para touch
+Para que las descargas funcionen correctamente, es necesario usar un servidor web local debido a restricciones de seguridad del navegador. Consulta `INSTRUCCIONES_SERVIDOR.md` para más detalles.
 
-## 🔧 Desarrollo
+## 📄 Licencia
 
-### Estructura del Código
-- **HTML semántico** con accesibilidad
-- **CSS modular** con variables
-- **JavaScript ES6+** con funciones modernas
-- **Código limpio** y comentado
-## 🚀 Próximas Mejoras
+Proyecto desarrollado para uso académico. Todos los derechos reservados.
 
-### Funcionalidades Planificadas
-- [ ] **Backend** con base de datos
-- [ ] **Autenticación** real con servidor
-- [ ] **Subida de archivos** real
-- [ ] **Sistema de comentarios**
-- [ ] **Notificaciones** push
-- [ ] **API REST** para integración
-- [ ] **Panel de administración**
-- [ ] **Reportes** y estadísticas avanzadas
+---
 
+*Repositorio Digital - Versión Beta*
