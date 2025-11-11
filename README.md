@@ -101,21 +101,6 @@ repositoriodigital_SE/
 - Descarga completa en ZIP con todos los archivos
 - Soporte para proyectos pre-cargados
 
-## 🎨 Personalización
-
-- **Tema Claro**: Azul oscuro con fondo blanco
-- **Tema Oscuro**: Fondo oscuro con acentos azules
-- Cambio de tema persistente en Local Storage
-
-## 📈 Características Técnicas
-
-- Diseño Mobile First
-- CSS Grid y Flexbox para layouts
-- Variables CSS para temas dinámicos
-- Local Storage para persistencia
-- Carga asíncrona de archivos
-- Generación de ZIP en el cliente
-
 ## 🔧 Requisitos para Descargas
 
 Para que las descargas funcionen correctamente, es necesario usar un servidor web local debido a restricciones de seguridad del navegador. Consulta `INSTRUCCIONES_SERVIDOR.md` para más detalles.
