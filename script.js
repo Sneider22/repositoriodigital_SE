@@ -87,7 +87,24 @@ function initializeApp() {
     projectForm.addEventListener('submit', handleProjectSubmit);
 
     // Búsqueda y filtros
-    searchInput.addEventListener('input', filterProjects);
+    window.suggestionSelected = false;
+    searchInput.addEventListener('input', (e) => {
+        const value = e.target.value;
+        // Si el usuario está escribiendo, resetear la bandera para mostrar sugerencias
+        if (window.suggestionSelected && value.length > 0) {
+            window.suggestionSelected = false;
+        }
+        showSearchSuggestions(value);
+        filterProjects();
+    });
+    
+    // Ocultar sugerencias al hacer clic fuera
+    document.addEventListener('click', (e) => {
+        // No ocultar si se hace clic en una sugerencia
+        if (!e.target.closest('.search-bar') && !e.target.closest('.suggestion-item')) {
+            hideSearchSuggestions();
+        }
+    });
     carreraFilter.addEventListener('change', filterProjects);
     semestreFilter.addEventListener('change', filterProjects);
     tipoFilter.addEventListener('change', filterProjects);
@@ -99,6 +116,59 @@ function initializeApp() {
         document.documentElement.setAttribute('data-theme', savedTheme);
         updateThemeIcon();
     }
+    
+    // Agregar event listeners a los badges de carrera
+    setupCarreraBadges();
+}
+
+// Mapeo de nombres cortos de carrera a nombres completos
+const carreraNameMap = {
+    'Arquitectura': 'Arquitectura',
+    'Ing. Civil': 'Ingeniería Civil',
+    'Ing. Eléctrica': 'Ingeniería Eléctrica',
+    'Ing. Electrónica': 'Ingeniería Electrónica',
+    'Ing. Industrial': 'Ingeniería Industrial',
+    'Ing. Mecánica': 'Ingeniería y Mantenimiento Mecánico',
+    'Ing. de Sistemas': 'Ingeniería de Sistemas',
+    'Ing. Diseño Industrial': 'Ingeniería de Diseño Industrial',
+    'Ing. Telecomunicaciones': 'Ingeniería en Telecomunicaciones',
+    'Ing. Química': 'Ingeniería Química',
+    'Ing. de Petróleo': 'Ingeniería de Petróleo',
+    'Ing. Agronómica': 'Ingeniería Agronómica'
+};
+
+function setupCarreraBadges() {
+    const carreraBadges = document.querySelectorAll('.carrera-badge');
+    carreraBadges.forEach(badge => {
+        badge.style.cursor = 'pointer';
+        badge.addEventListener('click', () => {
+            const carreraShortName = badge.textContent.trim();
+            const carreraFullName = carreraNameMap[carreraShortName];
+            
+            if (carreraFullName) {
+                // Navegar a la sección de repositorios
+                showSection('repositorios');
+                
+                // Establecer el filtro de carrera
+                carreraFilter.value = carreraFullName;
+                
+                // Limpiar el campo de búsqueda
+                searchInput.value = '';
+                hideSearchSuggestions();
+                
+                // Ejecutar el filtro
+                filterProjects();
+                
+                // Scroll suave al inicio de la sección
+                setTimeout(() => {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                }, 100);
+            }
+        });
+    });
 }
 
 function loadSampleData() {
@@ -219,7 +289,7 @@ function loadRealProjectsSync() {
         ],
         fileData: [], // Se cargará después si es posible
         author: 'Sneider Araque, Angel Melchor, Rubel Maneiro y Eric Gomes', // Puedes cambiar esto con el nombre del autor
-        profesor: 'Yerlin Herrera', // Puedes cambiar esto con el nombre del profesor
+        profesor: '...', // Puedes cambiar esto con el nombre del profesor
         date: '10/02/2025'
     });
 
@@ -279,7 +349,7 @@ projects.push({
     ],
     fileData: [], // Se cargará después si es posible
     author: 'Sofia Sanchez',
-    profesor: 'Martin Bilbao', // Puedes cambiar esto con el nombre del profesor
+    profesor: '...', // Puedes cambiar esto con el nombre del profesor
     date: '08/03/2023'
 });
 
@@ -556,6 +626,158 @@ function createProjectCard(project) {
     return card;
 }
 
+// Función para generar sugerencias de búsqueda
+function getSearchSuggestions(searchTerm) {
+    if (!searchTerm || searchTerm.length < 2) {
+        return [];
+    }
+    
+    const term = searchTerm.toLowerCase();
+    const suggestions = [];
+    const seen = new Set();
+    
+    // Buscar en títulos de proyectos
+    projects.forEach(project => {
+        const title = project.title;
+        if (title.toLowerCase().includes(term) && !seen.has(title)) {
+            seen.add(title);
+            suggestions.push({
+                text: title,
+                type: 'título',
+                icon: 'fas fa-file-alt'
+            });
+        }
+    });
+    
+    // Buscar en carreras
+    const carreras = [...new Set(projects.map(p => p.carrera))];
+    carreras.forEach(carrera => {
+        if (carrera.toLowerCase().includes(term) && !seen.has(carrera)) {
+            seen.add(carrera);
+            suggestions.push({
+                text: carrera,
+                type: 'carrera',
+                icon: 'fas fa-graduation-cap'
+            });
+        }
+    });
+    
+    // Buscar en palabras clave
+    projects.forEach(project => {
+        const keywords = project.keywords.split(',').map(k => k.trim());
+        keywords.forEach(keyword => {
+            if (keyword.toLowerCase().includes(term) && keyword.length > 2 && !seen.has(keyword)) {
+                seen.add(keyword);
+                suggestions.push({
+                    text: keyword,
+                    type: 'palabra clave',
+                    icon: 'fas fa-tag'
+                });
+            }
+        });
+    });
+    
+    // Limitar a 3 sugerencias
+    return suggestions.slice(0, 3);
+}
+
+function showSearchSuggestions(searchTerm) {
+    const suggestionsContainer = document.getElementById('searchSuggestions');
+    
+    // No mostrar sugerencias si se seleccionó una recientemente
+    if (window.suggestionSelected) {
+        return;
+    }
+    
+    const suggestions = getSearchSuggestions(searchTerm);
+    
+    if (suggestions.length === 0 || !searchTerm) {
+        suggestionsContainer.innerHTML = '';
+        suggestionsContainer.style.display = 'none';
+        return;
+    }
+    
+    suggestionsContainer.innerHTML = suggestions.map((suggestion, index) => `
+        <div class="suggestion-item" data-suggestion="${suggestion.text}">
+            <i class="${suggestion.icon}"></i>
+            <span class="suggestion-text">${highlightMatch(suggestion.text, searchTerm)}</span>
+            <span class="suggestion-type">${suggestion.type}</span>
+        </div>
+    `).join('');
+    
+    suggestionsContainer.style.display = 'block';
+    
+    // Agregar event listeners a las sugerencias
+    suggestionsContainer.querySelectorAll('.suggestion-item').forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.stopPropagation(); // Evitar que se propague el evento
+            e.preventDefault(); // Prevenir comportamiento por defecto
+            const text = item.getAttribute('data-suggestion');
+            
+            // Marcar que se seleccionó una sugerencia
+            window.suggestionSelected = true;
+            
+            searchInput.value = text;
+            hideSearchSuggestions();
+            
+            // Ejecutar el filtro directamente
+            filterProjects();
+            
+            // Resetear la bandera después de un momento para permitir nuevas búsquedas
+            setTimeout(() => {
+                window.suggestionSelected = false;
+            }, 300);
+            
+            searchInput.focus();
+        });
+    });
+}
+
+function highlightMatch(text, searchTerm) {
+    const regex = new RegExp(`(${searchTerm})`, 'gi');
+    return text.replace(regex, '<strong>$1</strong>');
+}
+
+function hideSearchSuggestions() {
+    const suggestionsContainer = document.getElementById('searchSuggestions');
+    suggestionsContainer.style.display = 'none';
+}
+
+// Funciones para el modal de imagen (globales)
+window.openImageModal = function(imageSrc, imageName) {
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    const modalImageName = document.getElementById('modalImageName');
+    
+    modalImage.src = imageSrc;
+    modalImageName.textContent = imageName;
+    modal.style.display = 'flex';
+    
+    // Prevenir scroll del body cuando el modal está abierto
+    document.body.style.overflow = 'hidden';
+};
+
+window.closeImageModal = function() {
+    const modal = document.getElementById('imageModal');
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+};
+
+// Cerrar modal al hacer clic fuera de la imagen
+window.addEventListener('click', function(event) {
+    const modal = document.getElementById('imageModal');
+    if (event.target === modal) {
+        closeImageModal();
+    }
+});
+
+// Cerrar modal con tecla ESC
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closeImageModal();
+    }
+});
+
 function filterProjects() {
     const searchTerm = searchInput.value.toLowerCase();
     const carreraValue = carreraFilter.value;
@@ -567,7 +789,8 @@ function filterProjects() {
         const matchesSearch = project.title.toLowerCase().includes(searchTerm) ||
                            project.description.toLowerCase().includes(searchTerm) ||
                            project.materia.toLowerCase().includes(searchTerm) ||
-                           project.keywords.toLowerCase().includes(searchTerm);
+                           project.keywords.toLowerCase().includes(searchTerm) ||
+                           project.carrera.toLowerCase().includes(searchTerm);
         
         const matchesCarrera = !carreraValue || project.carrera === carreraValue;
         const matchesSemestre = !semestreValue || project.semestre === semestreValue;
@@ -612,9 +835,9 @@ function updateThemeIcon() {
     const icon = themeToggle.querySelector('i');
     
     if (currentTheme === 'dark') {
-        icon.className = 'fas fa-sun';
-    } else {
         icon.className = 'fas fa-moon';
+    } else {
+        icon.className = 'fas fa-sun';
     }
 }
 
@@ -794,9 +1017,12 @@ function verDetalleProyecto(projectId) {
         `;
         imageFiles.forEach(img => {
             const filePath = getFilePath(project, img.name);
+            // Escapar comillas y caracteres especiales para el onclick
+            const escapedName = img.name.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+            const escapedPath = filePath.replace(/'/g, "\\'").replace(/"/g, '&quot;');
             galeriaHTML += `
                 <div class="galeria-card">
-                    <img src="${filePath}" alt="${img.name}" class="galeria-imagen" loading="lazy" onerror="this.style.display='none'">
+                    <img src="${filePath}" alt="${img.name}" class="galeria-imagen" loading="lazy" onerror="this.style.display='none'" onclick="openImageModal('${escapedPath}', '${escapedName}')" style="cursor: pointer;">
                     <div class="galeria-card-overlay">
                         <span class="galeria-nombre">${img.name}</span>
                         <button class="btn-galeria-download" onclick="event.stopPropagation(); downloadSingleFile(${project.id}, ${img.index})" title="Descargar imagen">

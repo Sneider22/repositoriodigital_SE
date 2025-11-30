@@ -28,7 +28,7 @@
                 </div>
             </div>
             <button class="theme-toggle" id="themeToggle">
-                <i class="fas fa-moon"></i>
+                <i class="fas fa-sun"></i>
             </button>
         </nav>
     </header>
@@ -169,6 +169,7 @@
                 <div class="search-bar">
                     <input type="text" id="searchInput" placeholder="Buscar proyectos...">
                     <i class="fas fa-search"></i>
+                    <div class="search-suggestions" id="searchSuggestions"></div>
                 </div>
                 <div class="filters">
                     <select id="carreraFilter">
@@ -460,6 +461,17 @@
                 
                 <button type="submit" class="btn-primary">Subir Proyecto</button>
             </form>
+        </div>
+    </div>
+
+    <!-- Modal para imagen ampliada -->
+    <div id="imageModal" class="image-modal">
+        <div class="image-modal-content">
+            <span class="image-modal-close" onclick="closeImageModal()">&times;</span>
+            <img id="modalImage" src="" alt="">
+            <div class="image-modal-info">
+                <p id="modalImageName"></p>
+            </div>
         </div>
     </div>
 
